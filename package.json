@@ -1,0 +1,38 @@
+{
+  "name": "node-basic-hub",
+  "version": "0.1.0",
+  "description": "node 基础的一些东西",
+  "author": {
+    "name": "xiaoguoping",
+    "email": "xiaoguoping@meituan.com"
+  },
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "lint": "eslint ./packages --ext .ts"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-config-yayajing": "^1.0.1",
+    "husky": "^1.3.1",
+    "lerna": "^3.10.7",
+    "lint-staged": "^8.1.5",
+    "prettier": "^1.19.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": [
+        "lint-staged"
+      ]
+    }
+  },
+  "lint-staged": {
+    "packages/**/*.{js,ts,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}

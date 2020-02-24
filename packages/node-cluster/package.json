@@ -1,0 +1,19 @@
+{
+  "name": "node-cluster",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx webpack-dev-server --disableHostCheck=true --progress --colors --devtool cheap-module-eval-source-map --hot --inline",
+    "build": "npx webpack --progress --colors --devtool cheap-module-source-map -p"
+  },
+  "author": "",
+  "sideEffects": false,
+  "license": "ISC",
+  "devDependencies": {
+    "jquery": "^3.4.1"
+  },
+  "dependencies": {
+    "clusterhub": "^1.1.0"
+  }
+}
