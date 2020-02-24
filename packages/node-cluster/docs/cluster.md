@@ -1,6 +1,6 @@
 # node-cluster-workers-ipc 通行机制
 
-![image](../img/1.png)
+<img src="../img/1.png">
 
 Node 以单进程、JS 单线程架构运行时，由于其**异步非阻塞、事件驱动**的特性，能够同时接受大量并发请求，I/O 线程“接单”后放入事件队列中等着被事件循环处理。
 
