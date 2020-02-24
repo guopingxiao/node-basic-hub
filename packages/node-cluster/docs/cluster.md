@@ -1,6 +1,6 @@
-#n ode-cluster-workers-ipc 通行机制
+# node-cluster-workers-ipc 通行机制
 
-<img src="../img/1.png">
+![image](../img/1.png)
 
 Node 以单进程、JS 单线程架构运行时，由于其**异步非阻塞、事件驱动**的特性，能够同时接受大量并发请求，I/O 线程“接单”后放入事件队列中等着被事件循环处理。
 
@@ -10,7 +10,7 @@ Node 以单进程、JS 单线程架构运行时，由于其**异步非阻塞、�
 
 [Clustering in NodeJs — Performance Optimization — Part I](https://medium.com/tech-tajawal/clustering-in-nodejs-utilizing-multiple-processor-cores-75d78aeb0f4f) 一文中对单线程（进程）和 Cluster 集群，多个并发请求量下的平均处理时间做了测试比较，测试数据如下图。结果表明，在 Cluster 集群下，性能（请求平均处理时间）提升了 66%。
 
-<img src="../img/2.png">
+![image](../img/2.png)
 
 ## Cluster 实践
 
@@ -83,7 +83,7 @@ process.on("message", message => {
 process.send("Message from worker");
 ```
 
-<img src="../img/3.png">
+![image](../img/3.png)
 
 但是这个 IPC 通道只存在于父子进程之间，是由 libuv 创建的，**workers 之间如果要 IPC 该怎么办呢？** 因为 workers 不适合自己来实现 IPC 互相通信，谁来连接谁呢？**所以最好是通过一个代理来实现。workers 连接代理，与代理互相发送和接收消息，代理只负责转发，这样就能达到 workers 之间 IPC 的目的**。
 
@@ -117,7 +117,7 @@ process.send("Message from worker");
 
 Unix domain socket 实现 IPC 专职负责 workers IPC 代理，虽然自由度更高，能灵活控制 IPC 细节，但相应的会增加开发维护成本。如果只需要简单的 workers IPC ，完全可以让 master 代理，通过 master - worker IPC 提供的 API 快速实现。
 
-<img src="../img/4.png">
+![image](../img/4.png)
 
 **Egg.js** [进程间通信](https://eggjs.org/zh-cn/core/cluster-and-ipc.html)也介绍了这种方式，如果想要在所有 workers 之间同步，可以通过 **Agent** 来广播，如果想要在指定的 workers 间通信，就通过 master 来转发。
 
